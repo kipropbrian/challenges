@@ -1,20 +1,26 @@
 #27 Leetcode https://leetcode.com/problems/remove-element/description/
 
 def removeElement( nums: list[int], val: int) -> int:
+    k = 0
+
+    for i in range(len(nums)):
+        if nums[i] != val:
+            nums[k] = nums[i]
+            k+=1
+    return k
+
+def oremoveElement( nums: list[int], val: int) -> int:
     l = 0
-    for r in range(len(nums)):
-        if r == 2:
-            r += 10
-        print("After:", r)
-       
+    r = 0
+    while r < len(nums):
+        if r > l and nums[r] != val:
+            nums[l], nums[r] = nums[r], nums[l]
+            l+=1
+        elif nums[l] == val: #found target
+            r+=1
+        elif nums[l] != val: #non target index
+            l+=1
+            r+=1
+    return l
 
-    # for r in range(len(nums)):
-    #     print(l, r)
-    #     print(nums[r])
-    #     if nums[r] == val:
-    #         r += 1
-    #     else:
-    #         l +=1
-
-
-removeElement([1,2,3,4,5], 3)
+removeElement([0,1,2,2,3,0,4,2], 2)
